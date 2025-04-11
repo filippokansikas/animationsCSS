@@ -11,6 +11,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     background-color: #f0f0f0;
+    gap: 2rem;
 }
 
 .stage {
@@ -53,7 +54,6 @@ body {
 .right-curtain {
     background-image: url('https://media.istockphoto.com/id/886541926/photo/red-curtain-in-the-theater.jpg?s=612x612&w=0&k=20&c=n2y1lMiP7aGXKRYbMFsEkwGxW59QT9d3MmOKKfXvb4k=');
     transform-origin: left center;
-
 }
 
 .curtain.open .left-curtain {
@@ -90,7 +90,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.toggle-curtain {
+.toggle-curtain, .roll-button {
     padding: 10px 20px;
     font-size: 1.2rem;
     background-color: #4CAF50;
@@ -102,8 +102,54 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-curtain:hover {
+.toggle-curtain:hover, .roll-button:hover {
     background-color: #45a049;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Dice Styles */
+.dice-container {
+    display: flex;
+    gap: 2rem;
+    perspective: 1000px;
+    margin-top: 2rem;
+}
+
+.dice {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.front { transform: translateZ(50px); }
+.back { transform: translateZ(-50px) rotateY(180deg); }
+.right { transform: translateX(50px) rotateY(90deg); }
+.left { transform: translateX(-50px) rotateY(-90deg); }
+.top { transform: translateY(-50px) rotateX(90deg); }
+.bottom { transform: translateY(50px) rotateX(-90deg); }
+
+@keyframes roll {
+    0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+    100% { transform: rotateX(720deg) rotateY(360deg) rotateZ(180deg); }
+}
+
+.rolling {
+    animation: roll 1s ease-out;
 } 
